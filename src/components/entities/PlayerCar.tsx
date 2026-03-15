@@ -6,6 +6,7 @@ import { useKeyboardControls } from "@react-three/drei";
 import * as THREE from "three";
 import { useGameStore } from "@/store/gameStore";
 import { CarControls } from "@/types/car.types";
+import { playCrashSound } from "@/hooks/useGameLoop";
 
 const SPEED = 40;
 const TURN_SPEED = 1.8;
@@ -291,6 +292,12 @@ export default function PlayerCar({ externalControls }: PlayerCarProps) {
       linearDamping={0.5}
       angularDamping={1}
       enabledRotations={[false, false, false]}
+      onCollisionEnter={() => {
+        if (Math.abs(currentSpeed.current) > 5) {
+          playCrashSound();
+          currentSpeed.current *= 0.3;
+        }
+      }}
     >
       <group ref={meshRef}>
         <CarModel />

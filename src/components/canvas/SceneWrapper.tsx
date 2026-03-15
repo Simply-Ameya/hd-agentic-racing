@@ -6,6 +6,7 @@ import { useGameStore } from "@/store/gameStore";
 import HUD from "@/components/ui/HUD";
 import MobileControls from "@/components/ui/MobileControls";
 import { useMobileControls } from "@/hooks/useMobileControls";
+import { useGameLoop } from "@/hooks/useGameLoop";
 
 const keyMap = [
   { name: "forward", keys: ["ArrowUp", "KeyW"] },
@@ -35,6 +36,7 @@ function LoadingScreen({ message }: { message: string }) {
 export default function SceneWrapper() {
   const { phase, isMobile, setIsMobile } = useGameStore();
   const { controls, setControl } = useMobileControls();
+  useGameLoop();
 
   useEffect(() => {
     const checkMobile = () => {
