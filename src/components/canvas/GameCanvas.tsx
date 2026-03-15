@@ -8,6 +8,7 @@ import { useGameStore } from "@/store/gameStore";
 import Track from "../environment/Track";
 import PlayerCar from "../entities/PlayerCar";
 import { CarControls } from "@/types/car.types";
+import EnemyCar from "../entities/EnemyCar";
 
 const keyMap = [
   { name: "forward", keys: ["ArrowUp", "KeyW"] },
@@ -79,6 +80,9 @@ export default function GameCanvas({ externalControls }: GameCanvasProps) {
           <Suspense fallback={null}>
             <Track />
             <PlayerCar externalControls={externalControls} />
+            <EnemyCar id="enemy_0" index={0} startPosition={[5, 1, 0]} />
+            <EnemyCar id="enemy_1" index={1} startPosition={[-5, 1, 0]} />
+            <EnemyCar id="enemy_2" index={2} startPosition={[0, 1, 5]} />
           </Suspense>
         </Physics>
 
