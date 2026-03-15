@@ -7,6 +7,7 @@ import HUD from "@/components/ui/HUD";
 import MobileControls from "@/components/ui/MobileControls";
 import { useMobileControls } from "@/hooks/useMobileControls";
 import { useGameLoop } from "@/hooks/useGameLoop";
+import AICommentary from "../ui/AICommentary";
 
 const keyMap = [
   { name: "forward", keys: ["ArrowUp", "KeyW"] },
@@ -57,6 +58,12 @@ export default function SceneWrapper() {
 
         {/* HUD */}
         {phase === "playing" && <HUD />}
+        {phase === "playing" && <AICommentary />}
+
+        {/* Mobile Controls */}
+        {phase === "playing" && isMobile && (
+          <MobileControls setControl={setControl} />
+        )}
 
         {/* Mobile Controls */}
         {phase === "playing" && isMobile && (
