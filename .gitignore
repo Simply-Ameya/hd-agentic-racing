@@ -1,0 +1,89 @@
+# ========================
+# HD Racing Game .gitignore
+# ========================
+
+# ----- Dependencies -----
+node_modules/
+.pnp
+.pnp.js
+.yarn/install-state.gz
+
+# ----- Next.js -----
+.next/
+out/
+build/
+dist/
+
+# ----- Environment Variables (NEVER commit these) -----
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.production
+
+# ----- Keep the example env file -----
+!.env.example
+
+# ----- Vercel -----
+.vercel
+
+# ----- TypeScript -----
+*.tsbuildinfo
+next-env.d.ts
+
+# ----- Logs -----
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ----- OS Files -----
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ----- IDE / Editor -----
+.vscode/
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ----- Testing -----
+coverage/
+.nyc_output/
+
+# ----- Cache -----
+.cache/
+.parcel-cache/
+.eslintcache
+.stylelintcache
+
+# ----- 3D Assets (large files — use Git LFS instead) -----
+# Uncomment if your models/textures are large
+# public/models/*.glb
+# public/models/*.gltf
+# public/textures/*.ktx2
+# public/textures/*.hdr
+
+# ----- Audio (large files — use Git LFS instead) -----
+# Uncomment if your audio files are large
+# public/sounds/*.mp3
+# public/sounds/*.ogg
+# public/sounds/*.wav
+
+# ----- Misc -----
+*.pem
+.turbo/
