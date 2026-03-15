@@ -1,12 +1,20 @@
 "use client";
 import { Suspense, useEffect } from "react";
 import dynamic from "next/dynamic";
+import { KeyboardControls } from "@react-three/drei";
 import { useGameStore } from "@/store/gameStore";
 import HUD from "@/components/ui/HUD";
 import MobileControls from "@/components/ui/MobileControls";
 import { useMobileControls } from "@/hooks/useMobileControls";
 
-// Dynamically import canvas — disables SSR for Three.js
+const keyMap = [
+  { name: "forward", keys: ["ArrowUp", "KeyW"] },
+  { name: "backward", keys: ["ArrowDown", "KeyS"] },
+  { name: "left", keys: ["ArrowLeft", "KeyA"] },
+  { name: "right", keys: ["ArrowRight", "KeyD"] },
+  { name: "brake", keys: ["Space"] },
+];
+
 const GameCanvas = dynamic(() => import("@/components/canvas/GameCanvas"), {
   ssr: false,
   loading: () => <LoadingScreen message="Loading 3D engine..." />,
@@ -28,7 +36,6 @@ export default function SceneWrapper() {
   const { phase, isMobile, setIsMobile } = useGameStore();
   const { controls, setControl } = useMobileControls();
 
-  // Detect mobile device
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768 || "ontouchstart" in window);
@@ -39,19 +46,21 @@ export default function SceneWrapper() {
   }, [setIsMobile]);
 
   return (
-    <div className="relative w-full h-screen bg-black overflow-hidden">
-      {/* 3D Canvas */}
-      <Suspense fallback={<LoadingScreen message="Loading assets..." />}>
-        <GameCanvas />
-      </Suspense>
+    <KeyboardControls map={keyMap}>
+      <div className="relative w-full h-screen bg-black overflow-hidden">
+        {/* 3D Canvas */}
+        <Suspense fallback={<LoadingScreen message="Loading assets..." />}>
+          <GameCanvas externalControls={controls} />
+        </Suspense>
 
-      {/* HUD — only during race */}
-      {phase === "playing" && <HUD />}
+        {/* HUD */}
+        {phase === "playing" && <HUD />}
 
-      {/* Mobile Controls — only on mobile during race */}
-      {phase === "playing" && isMobile && (
-        <MobileControls setControl={setControl} />
-      )}
-    </div>
+        {/* Mobile Controls */}
+        {phase === "playing" && isMobile && (
+          <MobileControls setControl={setControl} />
+        )}
+      </div>
+    </KeyboardControls>
   );
 }

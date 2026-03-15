@@ -5,6 +5,9 @@ import { Sky, Environment, Grid, KeyboardControls } from "@react-three/drei";
 import { Suspense } from "react";
 import PostProcessing from "@/components/effects/PostProcessing";
 import { useGameStore } from "@/store/gameStore";
+import Track from "../environment/Track";
+import PlayerCar from "../entities/PlayerCar";
+import { CarControls } from "@/types/car.types";
 
 const keyMap = [
   { name: "forward", keys: ["ArrowUp", "KeyW"] },
@@ -14,7 +17,11 @@ const keyMap = [
   { name: "brake", keys: ["Space"] },
 ];
 
-export default function GameCanvas() {
+interface GameCanvasProps {
+  externalControls: CarControls;
+}
+
+export default function GameCanvas({ externalControls }: GameCanvasProps) {
   const { trackData } = useGameStore();
 
   // Pick sky/fog based on AI weather
@@ -33,7 +40,7 @@ export default function GameCanvas() {
       <Canvas
         shadows
         dpr={[1, 2]} // responsive resolution — 1x mobile, 2x desktop
-        camera={{ fov: 60, position: [0, 5, 10], near: 0.1, far: 1000 }}
+        camera={{ fov: 75, position: [0, 3, 8], near: 0.1, far: 1000 }}
         gl={{
           antialias: true,
           powerPreference: "high-performance",
@@ -67,20 +74,11 @@ export default function GameCanvas() {
         {/* Environment — PBR reflections */}
         <Environment preset="sunset" />
 
-        {/* Grid — placeholder until track is built */}
-        <Grid
-          infiniteGrid
-          cellSize={1}
-          cellThickness={0.5}
-          sectionSize={10}
-          sectionThickness={1}
-          fadeDistance={100}
-        />
-
         {/* Physics world */}
         <Physics gravity={[0, -20, 0]}>
           <Suspense fallback={null}>
-            {/* Entities will go here in next steps */}
+            <Track />
+            <PlayerCar externalControls={externalControls} />
           </Suspense>
         </Physics>
 

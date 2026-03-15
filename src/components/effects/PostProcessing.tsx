@@ -24,8 +24,8 @@ export default function PostProcessing() {
 
       {/* Bloom — headlights, neon, sun */}
       <Bloom
-        intensity={0.4}
-        luminanceThreshold={0.6}
+        intensity={0.2}
+        luminanceThreshold={0.8}
         luminanceSmoothing={0.9}
         mipmapBlur
       />
