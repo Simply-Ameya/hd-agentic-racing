@@ -1,104 +1,36 @@
-🏎️ HD Racing Game
-A high-definition 3D racing game built with Next.js, React Three Fiber, and Agentic AI powered by Google Gemini — fully free to run and deploy.
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-🎮 Features
+## Getting Started
 
-HD 3D Rendering — React Three Fiber + Three.js with full postprocessing (Bloom, Motion Blur, Depth of Field, Chromatic Aberration)
-Realistic Physics — Car physics and collisions powered by Rapier (@react-three/rapier)
-Agentic AI — Three AI agents powered by Google Gemini API:
+First, run the development server:
 
-🌍 World Generator — Procedurally generates unique tracks, biomes, and weather per race
-🤖 Enemy AI Director — Dynamically adjusts rival racer aggression, overtaking, and blocking
-🎲 AI Game Master — Reacts to in-game events with weather changes, hazards, and dynamic commentary
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-Spatial Sound — Engine sounds, crash effects, and background music via Howler.js
-AI Commentary — Live spoken commentary via the browser's Web Speech API (free, no API key)
-Fully Free Stack — No paid services, no credit card required
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-🛠️ Tech Stack
-LayerTechnologyFrameworkNext.js 14 (App Router)3D RenderingReact Three Fiber + Three.jsHD Visuals@react-three/postprocessingPhysics@react-three/rapierAI AgentsGoogle Gemini API (free tier)SoundHowler.js + Web Speech APIStateZustandDeploymentVercel (Hobby — free)
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-🚀 Getting Started
-Prerequisites
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-Node.js 18+
-npm or yarn
-A free Google AI Studio account (for Gemini API key)
+## Learn More
 
-1. Clone the repository
-   bashgit clone https://github.com/YOUR_USERNAME/hd-racing-game.git
-   cd hd-racing-game
-2. Install dependencies
-   bashnpm install
-3. Set up environment variables
-   bashcp .env.example .env.local
-   Then open .env.local and add your Gemini API key:
-   envGEMINI_API_KEY=your_api_key_here
-   Get a free key at 👉 aistudio.google.com — no credit card needed.
-4. Run the development server
-   bashnpm run dev
-   Open http://localhost:3000 in your browser.
+To learn more about Next.js, take a look at the following resources:
 
-📁 Project Structure
-src/
-├── app/
-│ ├── page.tsx # Main menu
-│ ├── game/
-│ │ └── page.tsx # Game page
-│ └── api/
-│ └── ai/
-│ ├── game-master/ # AI Game Master route
-│ ├── world-gen/ # Procedural world generation route
-│ └── enemy-ai/ # Enemy AI decisions route
-├── components/
-│ ├── canvas/ # R3F Canvas + postprocessing
-│ ├── entities/ # Player car, enemy cars, camera
-│ ├── environment/ # Track, terrain, sky, weather
-│ ├── effects/ # Particles, skid marks, FX
-│ └── ui/ # HUD, minimap, commentary
-├── hooks/ # useCarPhysics, useAIAgent, etc.
-├── store/ # Zustand game & AI state
-├── lib/
-│ ├── gemini.ts # Gemini API client
-│ └── prompts/ # AI prompt templates
-├── types/ # TypeScript types
-└── public/
-├── models/ # GLTF 3D models
-├── sounds/ # Engine, crash, music files
-└── textures/ # Road, terrain, car textures
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-🧠 AI Agents
-World Generator (/api/ai/world-gen)
-Called once per race. Returns a JSON track layout including waypoints, obstacles, weather conditions, and biome type. The client uses this to procedurally build the 3D track.
-Enemy AI Director (/api/ai/enemy-ai)
-Called every ~30 seconds during a race. Receives player position, speed, and lap data. Returns per-enemy decisions: aggression level, overtaking strategy, rubber-banding.
-AI Game Master (/api/ai/game-master)
-Triggered on key events (crash, overtake, lap complete). Returns dynamic world reactions: weather shifts, track hazards, shortcut openings, and commentary text spoken via Web Speech API.
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-🔊 Sound Sources
-All sounds are free and CC0 licensed:
+## Deploy on Vercel
 
-Engine & crash sounds — Freesound.org
-Background music — OpenGameArt.org
-AI Commentary — Browser Web Speech API (no download needed)
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-🌐 Deployment
-This project is deployed on Vercel (Hobby plan — free, no credit card).
-To deploy your own instance:
-bashnpm install -g vercel
-vercel
-Add your GEMINI_API_KEY in the Vercel dashboard under Project Settings → Environment Variables.
-
-📋 Roadmap
-
-Project setup & architecture
-Next.js scaffold + folder structure
-R3F Canvas + HD postprocessing pipeline
-Howler.js sound system
-Gemini AI agent routes
-Car physics + player controller
-Procedural track from AI JSON
-Enemy racers + AI decisions
-HUD + AI commentary
-HD polish (particles, skid marks, crowd)
-Vercel deployment
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
